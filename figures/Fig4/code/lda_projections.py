@@ -14,23 +14,6 @@ import seaborn as sns
 # LDA
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
 
-########################################################################################################
-
-
-def PCA_smooth(tensor1, tensor2, ncomp):
-    # tensor1 is for finding subspace, tensor2 is projected onto tensor1 subspace
-    dat1_m = tensor1.reshape([tensor1.shape[0], -1])
-    dat1_m = np.array([m-np.mean(m) for m in dat1_m])
-
-    dat2_m = tensor2.reshape([tensor2.shape[0], -1])
-    dat2_m = np.array([m-np.mean(m) for m in dat2_m])
-
-    U, s, Vt = np.linalg.svd(dat1_m, full_matrices=False)
-    dat_r = (dat2_m.T @ U[:,:ncomp]).T.reshape([ncomp,tensor2.shape[1],tensor2.shape[2]])
-    dat_r = sp.ndimage.gaussian_filter1d(dat_r, sigma=5)
-
-    return dat_r
-
 
 ########################################################################################################
 # load stuff
