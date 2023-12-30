@@ -20,7 +20,11 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
 ########################################################################################################
 
 # load reconstructed tensor and raw data
-t_sliceTCA  = np.load('../files/sliceTCA_reconstructed.npy').transpose([1,0,2]) # neurons, trials, time
+cbl_sliceTCA = np.load('../files/cbl_reconstructed.npy')
+ctx_sliceTCA = np.load('../files/ctx_reconstructed.npy')
+
+t_sliceTCA = np.concatenate([cbl_sliceTCA, ctx_sliceTCA])
+
 
 # load neural data
 cbl = np.load('../files/cbl_data.npy')
@@ -62,7 +66,7 @@ def LDA_proj(tensor1, tensor2, labels, ts):
     lda2 = LDA(n_components=1).fit(meandat1, 
                                    np.concatenate([np.zeros(len(labels)), np.ones(len(labels))])).coef_
 
-    # third axis:  pre-movement vs mid-movement
+    # third axis:  pre-reward vs post-reward
     meandat1 = np.concatenate([np.mean(tensor1[:,:, -20:], -1).T, 
                               np.mean(tensor1[:,:, 65:85], -1).T])
     lda3 = LDA(n_components=1).fit(meandat1, 
@@ -187,6 +191,7 @@ for li,latents in enumerate([ctx_raw, ctx_sliceTCA, ctx_proj]):
         plt.ylim(-50,50)
         plt.yticks([-50,50], [-50,50])
     plt.title(names[li], fontsize=10)
+
     for t in range(len(ts)):
         plt.plot(time[sum(ts[:t+1])], 0, 'k^')
 

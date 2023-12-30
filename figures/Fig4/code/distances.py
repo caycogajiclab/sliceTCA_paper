@@ -37,7 +37,11 @@ def PCA_smooth(tensor1, tensor2, ncomp):
 ########################################################################################################
 
 # load reconstructed tensor and raw data
-t_sliceTCA  = np.load('../files/sliceTCA_reconstructed.npy').transpose([1,0,2]) # neurons, trials, time
+cbl_sliceTCA = np.load('../files/cbl_reconstructed.npy')
+ctx_sliceTCA = np.load('../files/ctx_reconstructed.npy')
+
+t_sliceTCA = np.concatenate([cbl_sliceTCA, ctx_sliceTCA])
+
 
 # load neural data
 cbl = np.load('../files/cbl_data.npy')
