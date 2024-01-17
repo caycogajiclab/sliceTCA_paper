@@ -22,7 +22,7 @@ def import_models_data():
     Each model has a 'reconstruction' (time, trial neuron) and 'components' key. lfads and raw components are None.
     """
 
-    return np.load('files/models.npy', allow_pickle=True).flat[0]
+    return np.load('../files/models.npy', allow_pickle=True).flat[0]
 
 
 def import_movement():
@@ -30,7 +30,7 @@ def import_movement():
     :return: ndarray (time, trial, x-y)
     """
 
-    return np.load('files/movement.npy')
+    return np.load('../files/movement.npy')
 
 
 def import_target_pos():
@@ -38,7 +38,7 @@ def import_target_pos():
     :return: ndarray (trial, x-y)
     """
 
-    return np.load('files/target_pos.npy')
+    return np.load('../files/target_pos.npy')
 
 
 def import_target_angle():
@@ -46,7 +46,7 @@ def import_target_angle():
     :return: ndarray (trial,)
     """
 
-    return np.load('files/target_angle.npy')
+    return np.load('../files/target_angle.npy')
 
 
 def import_condition():
@@ -54,7 +54,7 @@ def import_condition():
     :return: ndarray (trial,)
     """
 
-    return np.load('files/condition.npy')
+    return np.load('../files/condition.npy')
 
 
 def import_decoding_r2():
@@ -68,7 +68,7 @@ def import_decoding_r2():
     Each model has a straight and curved key.
     """
 
-    return np.load('files/decoding_r2.npy', allow_pickle=True).flat[0]
+    return np.load('../files/decoding_r2.npy', allow_pickle=True).flat[0]
 
 
 def get_movement_avg(data, movement, angles, split=-1):
